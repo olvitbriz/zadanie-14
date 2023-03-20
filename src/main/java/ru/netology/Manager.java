@@ -22,6 +22,7 @@ public class Manager {
         Ticket[] result = new Ticket[0];
 
         for (Ticket ticket : repository.findAll()) {
+
             if (matches(ticket, from, to)) {
                 Ticket[] tmp = new Ticket[result.length + 1];
                 for (int i = 0; i < result.length; i++) {
@@ -31,6 +32,11 @@ public class Manager {
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
             }
+
+
+        }
+        if (result.length == 0) {
+            throw new NotFoundException(from, to);
 
         }
         Arrays.sort(result);
